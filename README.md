@@ -41,8 +41,11 @@ composer update
 2.couchbase配置
 
 [Couchbase 安装](https://github.com/matrozov/yii2-couchbase)
+
 [Couchbase 中文资料](https://couchbase.shujuwajue.com/chapter1.html)
+
 [Couchbase SDK-DOCTOR](https://github.com/couchbaselabs/sdk-doctor/releases/tag/v1.0.1)
+
 [Couchbase 建索引](https://docs.couchbase.com/server/6.0/n1ql/n1ql-language-reference/createindex.html)
 
 3.在couchbase中建立两个bucket，分别为：cart、item，Access Control请选择Standard port (TCP port 11211. Needs SASL auth.)
