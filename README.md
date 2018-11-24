@@ -48,7 +48,12 @@ composer update
 
 [Couchbase 建索引](https://docs.couchbase.com/server/6.0/n1ql/n1ql-language-reference/createindex.html)
 
-3.在couchbase中建立两个bucket，分别为：cart、item，Access Control请选择Standard port (TCP port 11211. Needs SASL auth.)
-Enter password: 请不要设置
+3.在couchbase中建立两个bucket，分别为：cart、item，
+
+Access Control请选择Standard port (TCP port 11211. Needs SASL auth.) Enter password: 请不要设置
+
+使用之前，请一定要先给cart建立cart_id的索引，item建立cart_id和product_id的联合索引，
+
+因为couchbase在bucket没有建索引的情况下，查询是会报错的
 
 4.然后，cart信息就存储到couchbase里面了，该扩展安装在路径 `vendor/zks888/fecshop_couchbase`下
