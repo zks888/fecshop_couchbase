@@ -56,4 +56,29 @@ Access Control请选择Standard port (TCP port 11211. Needs SASL auth.) Enter pa
 
 因为couchbase在bucket没有建索引的情况下，查询是会报错的
 
+先在couchbase的终端管理后台执行：
+``
+CREATE PRIMARY INDEX `idx_version` ON `migration` (`version`);
+CREATE INDEX `idx_version_applytime` ON `migration` (`version`, `apply_time`);
+
+``
+
+然后在@console\config\main.php里添加如下代码：
+
+``
+
+'controllerMap' => [
+    'couchbase-migrate' => 'matrozov\couchbase\console\controllers\MigrateController',
+],
+
+``
+
+最后就可以添加索引了
+
+``
+
+./yii couchbase-migrate  --interactive=0 --migrationPath=@fecshop/couchbase/migrations
+
+``
+
 4.然后，cart信息就存储到couchbase里面了，该扩展安装在路径 `vendor/zks888/fecshop_couchbase`下
