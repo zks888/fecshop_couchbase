@@ -34,4 +34,41 @@ class Cart extends ActiveRecord
             'app_name',
         ];
     }
+
+    /**
+     * @see ActiveRecord::insert()
+     */
+    protected function insertInternal($attributes = null)
+    {
+        if (!$this->beforeSave(true)) {
+            return false;
+        }
+
+        $values = $this->getDirtyAttributes($attributes);
+
+        if (empty($values)) {
+            $currentAttributes = $this->getAttributes();
+
+            if (isset($currentAttributes['_id'])) {
+                $values['_id'] = $currentAttributes['_id'];
+            }
+        }
+
+        $bucket = static::getBucket();
+        $sql = $bucket->db->getQueryBuilder()->insert($bucket->name, $values);
+        $sql = str_replace('":cart_id"', 'UUID()', $sql);
+        $newId = $bucket->db->createCommand($sql)->queryScalar();
+
+        if ($newId !== null) {
+            $this->setAttribute('_id', $newId);
+            $values['_id'] = $newId;
+        }
+
+        $changedAttributes = array_fill_keys(array_keys($values), null);
+
+        $this->setOldAttributes($values);
+        $this->afterSave(true, $changedAttributes);
+
+        return true;
+    }
 }

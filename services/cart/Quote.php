@@ -42,7 +42,7 @@ class Quote extends \fecshop\services\cart\Quote
     protected function actionCreateCart()
     {
         $myCart = new $this->_cartModelName;
-        $myCart->cart_id = 'UUID()';
+        $myCart->cart_id = ':cart_id';
         $myCart->store = Yii::$service->store->currentStore;
         $myCart->created_at = time();
         $myCart->updated_at = time();
@@ -62,12 +62,8 @@ class Quote extends \fecshop\services\cart\Quote
         }
         $myCart->remote_ip  = \fec\helpers\CFunc::get_real_ip();
         $myCart->app_name   = Yii::$service->helper->getAppName();
-        //if ($defaultShippingMethod = Yii::$service->shipping->getDefaultShippingMethod()) {
-        //    $myCart->shipping_method = $defaultShippingMethod;
-        //}
         $myCart->save();
         $newCart = $this->_cartModel->findOne($myCart['_id']);
-
         $cart_id = $newCart['cart_id'];
         $this->setCartId($cart_id);
         $this->setCart($newCart);

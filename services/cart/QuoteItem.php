@@ -47,7 +47,7 @@ class QuoteItem extends \fecshop\services\cart\QuoteItem
             Yii::$service->cart->quote->computeCartInfo();
         } else {
             $item_one = new $this->_itemModelName;
-            $item_one->item_id      = 'UUID()';
+            $item_one->item_id      = ':item_id';
             $item_one->active       = $this->itemDefaultActiveStatus;
             $item_one->store        = Yii::$service->store->currentStore;
             $item_one->cart_id      = $cart_id;
