@@ -1,0 +1,36 @@
+{  
+      "name": "zks888/fecshop_couchbase",
+      "description": "fecshop cart use couchbase storage ",
+      "keywords": [  
+        "yii2",  
+        "fecshop",
+        "couchbase cart"
+      ],  
+      "homepage": "https://github.com/zks888/fecshop_couchbase",
+      "type": "yii2-extension",  
+      "license": "BSD-3-Clause",  
+      "support": {  
+        "source": "https://github.com/zks888/fecshop_couchbase"
+      },  
+      "authors": [  
+        {  
+          "name": "zks888",
+          "email": "278506089@qq.com"
+        }  
+      ],  
+      "minimum-stability": "stable",  
+      "require": {  
+        "fancyecommerce/fecshop": ">=1.3.1.0"
+      },  
+      "autoload": {  
+        "psr-4": {  
+          "fecshop\\couchbase\\": ""
+        }  
+      },  
+      "repositories": [
+        {
+            "type": "composer",
+            "url": "https://asset-packagist.org"
+        }
+      ]
+}
