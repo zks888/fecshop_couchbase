@@ -71,4 +71,17 @@ class Cart extends ActiveRecord
 
         return true;
     }
+
+    /**
+     * 给model对应的bucket创建索引的方法
+     * 在migrate的时候会运行创建索引，譬如：
+     * @fecshop/couchbase/migrations/m181124_224655_cart_buckets
+     */
+    public static function create_index()
+    {
+        $sql = 'CREATE PRIMARY INDEX `idx_id` ON `cart`;';
+        self::getDb()->createCommand($sql)->execute();
+        $sql = 'CREATE INDEX `idx_cartid` ON `cart`(`cart_id`);';
+        self::getDb()->createCommand($sql)->execute();
+    }
 }
